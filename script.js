@@ -18,8 +18,11 @@ const CardFaces = [
   "worried-face",
 ];
 
+let cardPairs = [...CardFaces, ...CardFaces];
+cardPairs.sort(() => 0.5 - Math.random());
+
 const GameBoard = document.querySelector(".gameboard");
-CardFaces.forEach((cardName) => {
+cardPairs.forEach((cardName) => {
   //creating an html elememt
   const card = document.createElement("div");
   card.classList.add("card");
@@ -42,6 +45,4 @@ CardFaces.forEach((cardName) => {
       card.classList.remove("flipped");
     }, 2.0 * 1000);
   });
-
-  function removeTime() {}
 });

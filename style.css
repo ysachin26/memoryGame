@@ -5,12 +5,12 @@
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   justify-items: center;
 }
 .card {
-  width: 200px;
-  height: 230px;
+  width: 150px;
+  height: 180px;
   position: relative;
 }
 .card img {
