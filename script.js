@@ -24,7 +24,8 @@ cardPairs.sort(() => 0.5 - Math.random());
 //future upgrade of this is fisher yate algorithm (best and optimised method)
 
 const GameBoard = document.querySelector(".gameboard");
-
+const flipSound = new Audio("sound-effects/card-flip-sound.mp3");
+const successSound = new Audio("sound-effects/success.mp3");
 let firstCard = null;
 let secondCard = null;
 let lockedCard = false;
@@ -49,7 +50,8 @@ cardPairs.forEach((cardName) => {
   card.addEventListener("click", () => {
     if (lockedCard) return;
     if (card.classList.contains("flipped")) return;
-
+    flipSound.currentTime = 0;
+    flipSound.play();
     card.classList.add("flipped");
 
     //first click if card is null - then storing card into first card and return
@@ -66,6 +68,8 @@ cardPairs.forEach((cardName) => {
     const secondImg = secondCard.querySelector(".front").src;
     //matching the urls of both card
     if (firstImg === secondImg) {
+      successSound.currentTime = 0;
+      successSound.play();
       //in case of card match - flip is not done and cards fill remain flipped to its front face
       firstCard = null;
       secondCard = null;
