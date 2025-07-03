@@ -74,6 +74,17 @@ cardPairs.forEach((cardName) => {
       firstCard = null;
       secondCard = null;
       lockedCard = false;
+
+      const allCards = document.querySelectorAll(".card");
+      const allflipped = [...allCards].every((card) =>
+        card.classList.contains("flipped")
+      );
+
+      if (allflipped) {
+        setTimeout(() => {
+          document.querySelector(".gameboard").innerHTML = "You win";
+        }, 300);
+      }
     } else {
       setTimeout(() => {
         //if match not found then we will again flip it back
