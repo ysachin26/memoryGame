@@ -1,13 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Galada&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/right-container.css" />
+    <link rel="stylesheet" href="css/left-container.css" />
+    <link rel="stylesheet" href="css/gameboard.css" />
+    <link rel="stylesheet" href="css/general.css" />
     <title>Document</title>
   </head>
   <body>
-    <div class="gameboard"></div>
+    <div class="main-container">
+      <div class="top-navbar"><p></p></div>
+      <div class="grid-container">
+        <div class="left-container">
+          <div class="mode">
+            <div class="mode-name">Easy</div>
+            <div class="mode-drop-down">1</div>
+          </div>
+          <div class="move">
+            <div class="move-name">move</div>
+            <div class="move-count">12</div>
+          </div>
+          <div class="match">
+            <div class="match-name">Match</div>
+            <div class="match-count">12</div>
+          </div>
+          <div class="timer">
+            <div class="timing">12:30:57</div>
+          </div>
+        </div>
+        <div class="gameboard"></div>
+        <div class="right-container">
+          <div class="restart">
+            <div class="restart-name">restart</div>
+            <div class="restart-icon">1</div>
+          </div>
+          <div class="setting">
+            <div class="setting-name">setting</div>
+            <div class="setting-icon">12</div>
+          </div>
+          <div class="score">
+            <div class="score-name">score</div>
+            <div class="score-count">12</div>
+          </div>
+          <div class="toggle">
+            <div class="toggle-name">toggle</div>
+            <div class="toggle-icon">1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

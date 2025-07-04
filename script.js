@@ -6,16 +6,14 @@ const CardFaces = [
   "confused-face",
   "cool-face",
   "excited-face",
-  "happy-face",
   "loveeyes-face",
   "shocked-face",
-  "smile-hearts-face-1",
-  "smile-hearts-face-2",
+  /*  "smile-hearts-face-1",
   "smirk-face",
   "surprised-face",
   "tears-of-joy-face",
   "wink-face",
-  "worried-face",
+  "worried-face",*/
 ];
 
 let cardPairs = [...CardFaces, ...CardFaces]; //spread operator
@@ -82,7 +80,7 @@ cardPairs.forEach((cardName) => {
 
       if (allflipped) {
         setTimeout(() => {
-          document.querySelector(".gameboard").innerHTML = "You win";
+          alert("you win");
         }, 300);
       }
     } else {

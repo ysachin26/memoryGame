@@ -1,0 +1,19 @@
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  justify-items: center;
+  width: 100%;
+}
+
+.card {
+  width: 160px;
+  height: 190px;
+  position: relative;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.4s ease;
+}

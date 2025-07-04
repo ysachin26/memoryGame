@@ -1,0 +1,47 @@
+.left-container {
+  display: grid;
+  grid-template-rows: auto;
+  justify-content: space-evenly;
+  background: linear-gradient(to bottom, #ffc038, #ffffff);
+  justify-items: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+.mode,
+.move,
+.match,
+.timer {
+  gap: 1rem;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 60px;
+}
+.mode-name,
+.move-name,
+.match-name,
+.timing {
+  font-family: "Galada", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+}
+.mode-drop-down,
+.move-count,
+.match-count {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  background-color: rgb(17, 17, 17);
+  padding: 5px;
+  border-radius: 60px;
+  width: 20px;
+  height: 20px;
+  color: white;
+}

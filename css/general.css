@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.main-container {
+  margin: 2rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  max-width: 100%;
+  height: auto;
+  column-gap: 0.5rem;
+}
+
+.front {
+  transform: rotateY(180deg);
+  z-index: 2;
+}
+.card.flipped .front {
+  transform: rotateY(0);
+}
+.back {
+  transform: rotateY(0deg);
+  z-index: 1;
+}
+.card.flipped .back {
+  transform: rotateY(180deg);
+}
+
+.top-navbar {
+  justify-items: center;
+}
