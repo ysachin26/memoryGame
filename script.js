@@ -24,6 +24,11 @@ cardPairs.sort(() => 0.5 - Math.random());
 const GameBoard = document.querySelector(".gameboard");
 const flipSound = new Audio("sound-effects/card-flip-sound.mp3");
 const successSound = new Audio("sound-effects/success.mp3");
+const mainGameSound = new Audio("sound-effects/main-game-sound.mp3");
+mainGameSound.play();
+mainGameSound.loop = true;
+mainGameSound.muted = false;
+mainGameSound.volume = 0.5;
 let firstCard = null;
 let secondCard = null;
 let lockedCard = false;
@@ -49,6 +54,7 @@ cardPairs.forEach((cardName) => {
     if (lockedCard) return;
     if (card.classList.contains("flipped")) return;
     flipSound.currentTime = 0;
+    flipSound.volume = 0.6;
     flipSound.play();
     card.classList.add("flipped");
 
