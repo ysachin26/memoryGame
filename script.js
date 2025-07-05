@@ -24,7 +24,7 @@ cardPairs.sort(() => 0.5 - Math.random());
 const GameBoard = document.querySelector(".gameboard");
 const flipSound = new Audio("sound-effects/card-flip-sound.mp3");
 const successSound = new Audio("sound-effects/success.mp3");
-
+const victorySound = new Audio("sound-effects/Victory Sound Effect.mp3");
 window.addEventListener("load", () => {
   const mainGameSound = new Audio("sound-effects/main-game-sound.mp3");
   mainGameSound.loop = true;
@@ -102,6 +102,9 @@ cardPairs.forEach((cardName) => {
       );
 
       if (allflipped) {
+        mainGameSound.pause();
+        victorySound.volume = 0.8;
+        victorySound.play();
         setTimeout(() => {
           alert("you win");
         }, 300);
