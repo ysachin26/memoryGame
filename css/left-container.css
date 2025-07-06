@@ -10,6 +10,7 @@
 .mode img {
   height: 20px;
   filter: invert();
+
 }
 .mode,
 .move,
@@ -25,6 +26,11 @@
   height: 50px;
   padding: 10px;
   border-radius: 60px;
+   
+  position: relative;
+
+  cursor: pointer;
+
 }
 .mode-name,
 .move-name,
@@ -49,4 +55,42 @@
   width: 20px;
   height: 20px;
   color: white;
+}
+
+
+
+.options {
+position: absolute;
+  top: 90%;
+  left: 2;
+ width: 60%;
+  background-color: white;
+  font-family: "Galada", cursive;
+  font-size: large;
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+font-size: 600;
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: background-color 0.1 ease;
+  transition: width 0.1 ease;
+}
+
+
+
+.options.show
+{
+   transform: scaleY(1);
+  opacity: 1;
+  width: 70%;
+}
+.option:hover
+{
+  background-color: aquamarine;
+  width: 100%;
 }

@@ -1,4 +1,4 @@
-const CardFaces = [
+let CardFaces = [
   "angry-face",
   "baby-face",
   "big-grin-face",
@@ -121,3 +121,24 @@ cardPairs.forEach((cardName) => {
     }
   });
 });
+
+const gameModeOptions = document.querySelector(".mode");
+const modeOptions = document.querySelector(".options")
+
+gameModeOptions.addEventListener("click",()=>
+{
+  modeOptions.classList.toggle("show")
+});
+
+const innerOptions = document.querySelectorAll(".option")
+let saveMode   = '' ;
+   
+innerOptions.forEach((option)=>
+{
+  option.addEventListener("click",()=>
+  {
+       document.querySelector(".mode-name").innerHTML = option.textContent;
+       saveMode = option.textContent;
+      
+  })
+})
