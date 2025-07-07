@@ -59,3 +59,27 @@
 {
   filter: invert();
 }
+.restart-icon {
+  transition: transform 0.5s ease;
+}
+
+.restart:hover .restart-icon {
+  transform: rotate(100deg);
+}
+
+.setting
+{
+  cursor: pointer;
+}
+.setting:hover
+{
+  filter: invert();
+}
+.setting-icon
+{
+  transition: transform 0.5s ease;
+}
+.setting:hover .setting-icon
+{
+  transform: rotate(60deg);
+}

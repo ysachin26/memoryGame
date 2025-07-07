@@ -19,6 +19,10 @@ let CardFaces = [
 let count ;
 selectedMode("Easy")
 
+  let matchCount = 0;
+  
+
+ document.querySelector(".match-count").innerHTML = matchCount;
 
 //NOTE:this shuffle method is not efficient but it good for small games like this.
 //future upgrade of this is fisher yate algorithm (best and optimised method)
@@ -119,10 +123,14 @@ cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
     secondCard = card;
     lockedCard = true;
 
+     
     const firstImg = firstCard.querySelector(".front").src;
     const secondImg = secondCard.querySelector(".front").src;
     //matching the urls of both card
+  
     if (firstImg === secondImg) {
+     matchCount++
+        document.querySelector(".match-count").innerHTML = matchCount;
       successSound.currentTime = 0;
       successSound.play();
       //in case of card match - flip is not done and cards fill remain flipped to its front face
@@ -176,8 +184,9 @@ innerOptions.forEach((option)=>
   {
        document.querySelector(".mode-name").innerHTML = option.textContent;
        saveMode = option.textContent;
+        document.querySelector(".match-count").innerHTML = 0;
       count = selectedMode(saveMode)
-   console.log(count)
+
   })
 })
 
@@ -187,7 +196,10 @@ const restartGame = document.querySelector(".restart")
 restartGame.addEventListener("click",()=>
 {
   document.querySelector(".gameboard").innerHTML= " ";
+document.querySelector(".match-count").innerHTML = 0;
   mainGameSound.currentTime = 0;
   mainGameSound.play()
   renderGameBoard(6)
 })
+
+ 
