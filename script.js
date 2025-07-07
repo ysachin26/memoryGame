@@ -17,13 +17,13 @@ let CardFaces = [
 ];
 
 let count ;
-selectedMode("Easy")
+selectedMode("easy")
 
   let matchCount = 0;
-  
+  let moveCount = 0;
 
  document.querySelector(".match-count").innerHTML = matchCount;
-
+ document.querySelector(".move-count").innerHTML =  moveCount;
 //NOTE:this shuffle method is not efficient but it good for small games like this.
 //future upgrade of this is fisher yate algorithm (best and optimised method)
 
@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
 const mainGameSound = new Audio("sound-effects/main-game-sound.mp3");
 mainGameSound.volume = 0.6;
 mainGameSound.loop = true;
-
+ mainGameSound.play();
 document.addEventListener(
   "click",
   () => {
@@ -59,17 +59,17 @@ let lockedCard = false;
 
 function selectedMode(mode)
 {
-  if(mode==="Easy")
+  if(mode==="easy")
   {
     count = 6;
     renderGameBoard(count)
   }
-  else if (mode ==="Medium")
+  else if (mode ==="medium")
   {
     count = 9;
         renderGameBoard(count)
   }
-  else if (mode ==="Hard")
+  else if (mode ==="hard")
   {
    count = 12;
        renderGameBoard(count)
@@ -106,6 +106,8 @@ cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
   GameBoard.appendChild(card);
 
   card.addEventListener("click", () => {
+    moveCount++;
+    document.querySelector(".move-count").innerHTML = Math.floor(moveCount/2);
     if (lockedCard) return;
     if (card.classList.contains("flipped")) return;
     flipSound.currentTime = 0;
@@ -184,8 +186,12 @@ innerOptions.forEach((option)=>
   {
        document.querySelector(".mode-name").innerHTML = option.textContent;
        saveMode = option.textContent;
-        document.querySelector(".match-count").innerHTML = 0;
+        matchCount = 0 
+        moveCount = 0
       count = selectedMode(saveMode)
+     document.querySelector(".match-count").innerHTML = 0;
+          document.querySelector(".move-count").innerHTML = 0;
+         
 
   })
 })
@@ -199,9 +205,44 @@ restartGame.addEventListener("click",()=>
   matchCount = 0;
 document.querySelector(".match-count").innerHTML = matchCount;
 
+moveCount =0;
+document.querySelector(".move-count").innerHTML = moveCount;
+    document.querySelector(".mode-name").innerHTML = "easy";
+   
   mainGameSound.currentTime = 0;
   mainGameSound.play()
   renderGameBoard(6)
 })
 
  
+//game sound popup
+const soundClass = document.querySelector(".gamesoundpopup");
+const settingBtn = document.querySelector(".setting");
+const cancel = document.querySelector(".cancel");
+
+// Hide on cancel
+cancel.addEventListener("click", () => {
+  soundClass.classList.add("hidden");
+});
+
+// Toggle on settings button
+settingBtn.addEventListener("click", () => {
+  soundClass.classList.toggle("hidden");
+});
+
+
+const getbtn = document.querySelector(".main-game-sound-button")
+const buttonSlider = document.querySelector(".button-slider")
+const soundMode = document.querySelector(".main-game-sound-name")
+
+getbtn.addEventListener("click", () => {
+  if (mainGameSound.paused) {
+    mainGameSound.play();
+    getbtn.querySelector("span").textContent = "ON";
+    buttonSlider.style.left = "calc(100% - 25px)";
+  } else {
+    mainGameSound.pause();
+    getbtn.querySelector("span").textContent = "OFF";
+    buttonSlider.style.left = "5px";
+  }
+});
