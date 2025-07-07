@@ -2,10 +2,11 @@
   display: grid;
   grid-template-rows: auto;
   justify-content: space-evenly;
-  background: linear-gradient(to bottom, #ffc038, #ffffff);
+    background:  rgb(255, 181, 44);
   justify-items: center;
   align-items: center;
   border-radius: 1rem;
+  min-height: 500px;
 }
 .restart,
 .setting,
@@ -17,8 +18,8 @@
   justify-content: center;
   align-items: center;
   background-color: white;
-  width: 150px;
-  height: 50px;
+  width: 130px;
+  height: 40px;
   padding: 10px;
   border-radius: 60px;
 }

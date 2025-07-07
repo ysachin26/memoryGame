@@ -2,10 +2,11 @@
   display: grid;
   grid-template-rows: auto;
   justify-content: space-evenly;
-  background: linear-gradient(to bottom, #ffc038, #ffffff);
+  background:  rgb(255, 181, 44);
   justify-items: center;
   align-items: center;
   border-radius: 1rem;
+  min-height: 500px;
 }
 .mode img {
   height: 20px;
@@ -16,14 +17,14 @@
 .move,
 .match,
 .timer {
-  gap: 1rem;
+  gap: .5rem;
   display: flex;
   justify-items: center;
   justify-content: center;
   align-items: center;
   background-color: white;
-  width: 150px;
-  height: 50px;
+  width: 130px;
+  height: 40px;
   padding: 10px;
   border-radius: 60px;
    
@@ -103,4 +104,8 @@ font-size: 600;
  .options
  {
   color: black;
+ }
+ .mode:hover .mode-drop-down
+ {
+  filter:invert()
  }

@@ -196,7 +196,9 @@ const restartGame = document.querySelector(".restart")
 restartGame.addEventListener("click",()=>
 {
   document.querySelector(".gameboard").innerHTML= " ";
-document.querySelector(".match-count").innerHTML = 0;
+  matchCount = 0;
+document.querySelector(".match-count").innerHTML = matchCount;
+
   mainGameSound.currentTime = 0;
   mainGameSound.play()
   renderGameBoard(6)
