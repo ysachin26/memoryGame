@@ -8,20 +8,22 @@ let CardFaces = [
   "excited-face",
   "loveeyes-face",
   "shocked-face",
-  /*  "smile-hearts-face-1",
+  "smile-hearts-face-1",
   "smirk-face",
   "surprised-face",
   "tears-of-joy-face",
   "wink-face",
-  "worried-face",*/
+  "worried-face"
 ];
 
-let cardPairs = [...CardFaces, ...CardFaces]; //spread operator
-cardPairs.sort(() => 0.5 - Math.random());
+let count ;
+selectedMode("Easy")
+
+
 //NOTE:this shuffle method is not efficient but it good for small games like this.
 //future upgrade of this is fisher yate algorithm (best and optimised method)
 
-const GameBoard = document.querySelector(".gameboard");
+
 const flipSound = new Audio("sound-effects/card-flip-sound.mp3");
 const successSound = new Audio("sound-effects/success.mp3");
 const victorySound = new Audio("sound-effects/Victory Sound Effect.mp3");
@@ -50,7 +52,38 @@ let firstCard = null;
 let secondCard = null;
 let lockedCard = false;
 
-cardPairs.forEach((cardName) => {
+
+function selectedMode(mode)
+{
+  if(mode==="Easy")
+  {
+    count = 6;
+    renderGameBoard(count)
+  }
+  else if (mode ==="Medium")
+  {
+    count = 9;
+        renderGameBoard(count)
+  }
+  else if (mode ==="Hard")
+  {
+   count = 12;
+       renderGameBoard(count)
+  }
+  else
+  {
+    count = 6;
+        renderGameBoard(count)
+  }
+  return count
+}
+function renderGameBoard(count)
+{
+  const GameBoard = document.querySelector(".gameboard");
+   GameBoard.innerHTML = "";
+let selectedCart = [...CardFaces].slice(0,count).sort(()=> 0.5-Math.random()); //spread operator
+ let cardPairs = [...selectedCart,...selectedCart];
+ cardPairs.forEach((cardName) => {
   //creating an html elememt
   const card = document.createElement("div");
   card.classList.add("card");
@@ -121,6 +154,9 @@ cardPairs.forEach((cardName) => {
     }
   });
 });
+ 
+}
+
 
 const gameModeOptions = document.querySelector(".mode");
 const modeOptions = document.querySelector(".options")
@@ -139,6 +175,7 @@ innerOptions.forEach((option)=>
   {
        document.querySelector(".mode-name").innerHTML = option.textContent;
        saveMode = option.textContent;
-      
+      count = selectedMode(saveMode)
+   console.log(count)
   })
 })

@@ -94,3 +94,13 @@ font-size: 600;
   background-color: aquamarine;
   width: 100%;
 }
+.mode:hover
+{
+  background-color:black;
+  color: white;
+ 
+}
+ .options
+ {
+  color: black;
+ }
