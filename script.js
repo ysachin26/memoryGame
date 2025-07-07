@@ -81,8 +81,9 @@ function renderGameBoard(count)
 {
   const GameBoard = document.querySelector(".gameboard");
    GameBoard.innerHTML = "";
-let selectedCart = [...CardFaces].slice(0,count).sort(()=> 0.5-Math.random()); //spread operator
- let cardPairs = [...selectedCart,...selectedCart];
+ let selectedCart = [...CardFaces].slice(0, count).sort(() => 0.5 - Math.random());
+let cardPairs = [...selectedCart, ...selectedCart];
+cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
  cardPairs.forEach((cardName) => {
   //creating an html elememt
   const card = document.createElement("div");
@@ -178,4 +179,15 @@ innerOptions.forEach((option)=>
       count = selectedMode(saveMode)
    console.log(count)
   })
+})
+
+//restart game
+
+const restartGame = document.querySelector(".restart")
+restartGame.addEventListener("click",()=>
+{
+  document.querySelector(".gameboard").innerHTML= " ";
+  mainGameSound.currentTime = 0;
+  mainGameSound.play()
+  renderGameBoard(6)
 })

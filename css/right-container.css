@@ -51,3 +51,11 @@
   height: 20px;
   filter: invert();
 }
+.restart
+{
+  cursor: pointer;
+}
+.restart:hover
+{
+  filter: invert();
+}
