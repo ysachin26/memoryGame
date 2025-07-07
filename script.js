@@ -239,10 +239,10 @@ getbtn.addEventListener("click", () => {
   if (mainGameSound.paused) {
     mainGameSound.play();
     getbtn.querySelector("span").textContent = "ON";
-    buttonSlider.style.left = "calc(100% - 25px)";
+    buttonSlider.style.left = " 5px";
   } else {
     mainGameSound.pause();
     getbtn.querySelector("span").textContent = "OFF";
-    buttonSlider.style.left = "5px";
+  buttonSlider.style.left = "calc(100% - 25px)";
   }
 });
