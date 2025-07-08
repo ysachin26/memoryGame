@@ -245,4 +245,12 @@ getbtn.addEventListener("click", () => {
     getbtn.querySelector("span").textContent = "OFF";
   buttonSlider.style.left = "calc(100% - 25px)";
   }
-});
+}); 
+
+const startPage = document.querySelector(".instruction")
+const startBtn = document.querySelector(".start-game")
+
+startBtn.addEventListener("click",()=>
+{
+startPage.classList.add("instruction-hidden")
+})
