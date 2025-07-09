@@ -24,6 +24,8 @@ selectedMode("easy")
 
  document.querySelector(".match-count").innerHTML = matchCount;
  document.querySelector(".move-count").innerHTML =  moveCount;
+ const winningBoard = document.querySelector(".winningpopup")
+ 
 //NOTE:this shuffle method is not efficient but it good for small games like this.
 //future upgrade of this is fisher yate algorithm (best and optimised method)
 
@@ -150,7 +152,7 @@ cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
         victorySound.volume = 0.8;
         victorySound.play();
         setTimeout(() => {
-          alert("you win");
+          winningBoard.classList.remove("winningpopup-hidden")
         }, 300);
       }
     } else {
@@ -219,10 +221,13 @@ document.querySelector(".move-count").innerHTML = moveCount;
 const soundClass = document.querySelector(".gamesoundpopup");
 const settingBtn = document.querySelector(".setting");
 const cancel = document.querySelector(".cancel");
-
+const WinningCancelBtn = document.querySelector(".WinningCancelBtn");
 // Hide on cancel
 cancel.addEventListener("click", () => {
   soundClass.classList.add("hidden");
+});
+WinningCancelBtn.addEventListener("click", () => {
+  soundClass.classList.add("winningpopup-hidden");
 });
 
 // Toggle on settings button
@@ -249,8 +254,11 @@ getbtn.addEventListener("click", () => {
 
 const startPage = document.querySelector(".instruction")
 const startBtn = document.querySelector(".start-game")
-
+ let playerName = '';
+ 
 startBtn.addEventListener("click",()=>
 {
 startPage.classList.add("instruction-hidden")
-})
+ playerName = document.querySelector(".playerName input").value;
+ document.querySelector(".winningPlayerName").innerHTML = playerName;
+}) 

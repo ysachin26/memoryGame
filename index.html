@@ -34,7 +34,11 @@
                 <div class="right-box-2"></div>
             </div>
         </div>
+        
         <div class="bottom">
+          <div class="playerName">
+          <input type="text" placeholder="enter player name">
+        </div>
             <button class="start-game">
                 Start Game
             </button>
@@ -110,6 +114,30 @@
     </div>
         
 </div>
+
+<!--winning popup-->
+<div class="winningpopup winningpopup-hidden">
+    <div class="winningpopup-container">
+    <div class="WinningCancelBtn"><img src="icons/cancel.png" alt=""></div>
+        <div class="winningMessage">Congratulation </div>
+        <div class="winningPlayerName">
+           Sachin
+        </div>
+        <div class="popper-video">
+        <div class="popper-video-left">
+            
+            <video id="victoryVideo" autoplay muted playsinline loop>
+  <source src="winning assests/colorful-party-poppers-bursting-with-confetti-and-fun-15077339-12223546 (1).mp4" type="video/mp4" />
+</video>
+<video id="victoryVideo2" autoplay muted playsinline loop>
+  <source src="winning assests/confetti-animation-download-in-lottie-json-gif-static-svg-file-formats--poppers-party-popper-celebration-new-year-firecracker-pack-entertainment-animations-9553670.mp4" type="video/mp4" />
+</video>
+        </div>
+        <div class="popper-video-right"><video id="victoryVideo" autoplay muted playsinline loop>
+  <source src="winning assests/colorful-party-poppers-bursting-with-confetti-and-fun-15077339-12223546 (1).mp4" type="video/mp4" />
+</video></div>
+ </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

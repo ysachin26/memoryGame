@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Galada&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+                .winningpopup
+        {
+            display: flex;
+            gap: 1rem;
+            justify-self: center;
+            align-items: center;
+            justify-content: center;
+            min-height:300px;
+            background-color: rgba(255, 219, 99, 0.925);
+           min-width:  500px;
+           border-radius: 1rem;
+           position: relative;
+           
+        }
+        .main-game-sound-button  
+        {
+             position: relative;
+            cursor: pointer;
+            height: 20px;
+            width: 80px;
+            border: none;
+            padding: 5px;
+            margin: 5px;
+            border: 2px solid red;
+            border-radius: 50px;
+            background-color: rgb(255, 255, 255);
+        }
+             .main-game-sound-button:hover
+             {
+                transition:0.3s linear;
+                background-color: rgb(255, 208, 208);
+             }
+        .button-slider
+        {
+            position: absolute;
+            background-color: red;
+           width: 20px;
+         right: 5px;
+           height: 20px;
+            border-radius: 100%;
+           
+              
+             transition: 0.5s;   
+        }
+
+        .main-game-sound-button:hover .button-slider
+        {
+            left: calc(25px - 100%);
+           
+        }
+ .main-game-sound-name
+ {
+font-family: "Galada", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+ }
+        .button-slider span
+        {
+            position: absolute;
+            left: 30px;
+        }
+.main-game-sound-button span{
+    position: absolute;
+    left : 30px;
+}
+.cancel img
+{
+    position: absolute;
+    top:10px;
+    right: 20px;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.winningpopup-container
+{
+    display: flex;
+    gap: .6rem;
+    font-family: "Galada", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+}
+.popper-video-left video
+{
+    mix-blend-mode: multiply;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+ 
+     filter: none;
+     background: none;
+}
+.popper-video-right video
+{
+    mix-blend-mode: multiply;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+ 
+     filter: none;
+     background: none;
+}
+#victoryVideo2
+{
+    position: absolute;
+    left: 0;
+ right: 0;
+ bottom: 0;
+ top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* Or "contain" if needed */
+  background: none;
+  pointer-events: none;
+}
+    </style>
+</head>
+<body>
+      <div class="winningpopup">
+    <div class="winningpopup-container">
+    <div class="cancel"><img src="icons/cancel.png" alt=""></div>
+        <div class="winningMessage">Congratulation </div>
+        <div class="winningPlayerName">
+           Sachin
+        </div>
+        <div class="popper-video">
+        <div class="popper-video-left">
+            
+            <video id="victoryVideo" autoplay muted playsinline loop>
+  <source src="winning assests/colorful-party-poppers-bursting-with-confetti-and-fun-15077339-12223546 (1).mp4" type="video/mp4" />
+</video>
+<video id="victoryVideo2" autoplay muted playsinline loop>
+  <source src="winning assests/confetti-animation-download-in-lottie-json-gif-static-svg-file-formats--poppers-party-popper-celebration-new-year-firecracker-pack-entertainment-animations-9553670.mp4" type="video/mp4" />
+</video>
+        </div>
+        <div class="popper-video-right"><video id="victoryVideo" autoplay muted playsinline loop>
+  <source src="winning assests/colorful-party-poppers-bursting-with-confetti-and-fun-15077339-12223546 (1).mp4" type="video/mp4" />
+</video></div>
+ </div>
+    </div>
+</body>
+</html>

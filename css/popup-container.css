@@ -1,6 +1,7 @@
-      .instruction 
-        {
-           display: flex;
+   
+   .instruction 
+    {
+     display: flex;
    height: 100vh;
    width: 100vw;
    justify-content: center;
@@ -11,36 +12,34 @@
    z-index: 1000;
      backdrop-filter: blur(5px);
   background-color: rgba(0, 0, 0, 0.3);
-        }
-        .instruction-wrapper
-        {  display: flex;
+  }
+ .instruction-wrapper
+  {  display: flex;
       
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height:300px;
-            background-color: rgba(255, 219, 99, 0.925);
-           min-width:  500px;
-           border-radius: 1rem;
-           position: relative;
-           z-index: 1000;
-        }
-        .top 
-        {
-            display: flex;
-            gap: 3rem;
-        }
-        .left,.right
-        {
-            display: flex;
-           
-            gap: 1rem;
-        }
-        .left-box-1
-        { background-color: rgb(255, 199, 95);
-         
-          
-           z-index: 2;
+   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height:300px;
+   background-color: rgba(255, 219, 99, 0.925);
+ min-width:  500px;
+  border-radius: 1rem;
+  position: relative;
+z-index: 1000;
+  }
+.top 
+{
+   display: flex;
+gap: 3rem;
+ }
+.left,.right
+  {
+ display: flex;
+  gap: 1rem;
+  }
+  .left-box-1
+ { background-color: rgb(255, 199, 95);
+
+        z-index: 2;
            border: 2px solid rgb(255, 183, 28);
            border-radius: 10px;
            padding: 3rem;
@@ -85,6 +84,13 @@
         .bottom
         {
             margin-top: 2rem;
+        }
+        .playerName input
+        {
+          border: none;
+          padding: .6rem;
+     border-radius: 2rem;
+          width: 14rem;
         }
         .start-game
         {
@@ -208,4 +214,87 @@ font-family: "Galada", cursive;
 .cancel img:hover
 {
   transform: rotate(20deg);
+}
+
+/*winning pop up*/
+
+              .winningpopup
+        {
+           display: flex;
+   height: 100vh;
+   width: 100vw;
+   justify-content: center;
+   align-items: center;
+   position: fixed;
+   top:0;
+   left: 0;
+ z-index: 1001;
+     backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+                  
+        }
+     
+        .winningpopup-container{
+   display: flex;
+      
+            justify-content: center;
+            align-items: center;
+     
+            min-height:300px;
+            background-color: rgba(255, 219, 99, 0.925);
+           min-width:  500px;
+          gap: .6rem;
+           position: relative;
+            
+    font-family: "Galada", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+}  
+.winningpopup-hidden{
+  display: none;
+}
+.WinningCancelBtn img
+{
+    position: absolute;
+    top:10px;
+    right: 20px;
+    height: 1.5rem;
+    cursor: pointer;
+    width: 1.5rem;
+}
+.WinningCancelBtn img:hover
+{
+  transform: rotate(20deg);
+}
+.popper-video-left video
+{
+    mix-blend-mode: multiply;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+ 
+  
+}
+.popper-video-right video
+{
+    mix-blend-mode: multiply;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+ 
+     
+}
+#victoryVideo2
+{
+    position: absolute;
+    left: 0;
+ right: 0;
+ bottom: 0;
+ top: 0;
+  width: 100%;
+  height: 100%;
+   object-fit: fill;
 }
