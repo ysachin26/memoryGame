@@ -151,9 +151,12 @@ cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
         mainGameSound.pause();
         victorySound.volume = 0.8;
         victorySound.play();
+         recordGameTime();
         setTimeout(() => {
           winningBoard.classList.remove("winningpopup-hidden")
         }, 300);
+
+       
       }
     } else {
       setTimeout(() => {
@@ -261,4 +264,35 @@ startBtn.addEventListener("click",()=>
 startPage.classList.add("instruction-hidden")
  playerName = document.querySelector(".playerName input").value;
  document.querySelector(".winningPlayerName").innerHTML = playerName;
+  callTimer()
 }) 
+
+
+//game timer logic
+
+let [seconds, minutes] = [0, 0];
+let timerInterval = null; 
+
+function GameTimer() {
+  seconds++;
+  if (seconds == 60) {
+    seconds = 0;
+    minutes++;
+  }
+
+  let secondsTimer = seconds < 10 ? "0" + seconds : seconds;
+  let minuteTimer = minutes < 10 ? "0" + minutes : minutes;
+
+  document.querySelector(".timing").innerHTML = `${minuteTimer}:${secondsTimer}`;
+}
+
+function callTimer() {
+ 
+  clearInterval(timerInterval);
+  timerInterval = setInterval(GameTimer, 1000);
+}
+
+function recordGameTime() {
+  clearInterval(timerInterval);
+  console.log(`Final Time: ${minutes} minutes and ${seconds} seconds`);
+}
