@@ -225,13 +225,10 @@ restartGame.addEventListener("click", () => {
 const soundClass = document.querySelector(".gamesoundpopup");
 const settingBtn = document.querySelector(".setting");
 const cancel = document.querySelector(".cancel");
-const WinningCancelBtn = document.querySelector(".WinningCancelBtn");
+
 // Hide on cancel
 cancel.addEventListener("click", () => {
   soundClass.classList.add("hidden");
-});
-WinningCancelBtn.addEventListener("click", () => {
-  soundClass.classList.add("winningpopup-hidden");
 });
 
 // Toggle on settings button
@@ -264,7 +261,7 @@ startBtn.addEventListener("click",()=>
 {
 startPage.classList.add("instruction-hidden")
  playerName = document.querySelector(".playerName input").value;
- document.querySelector(".winningPlayerName").innerHTML = playerName;
+ document.querySelector(".winningPlayerName").innerHTML = `Congratulations ${playerName}`;
   callTimer()
 }) 
 
@@ -297,3 +294,36 @@ function recordGameTime() {
   clearInterval(timerInterval);
   console.log(`Final Time: ${minutes} minutes and ${seconds} seconds`);
 }
+
+const playAgain = document.getElementById("playagainbtn");
+
+playAgain.addEventListener("click", () => {
+  // Hide the popup
+  document.querySelector(".winningpopup").classList.add("winningpopup-hidden");
+
+  // Reset values
+  matchCount = 0;
+  moveCount = 0;
+  document.querySelector(".match-count").innerHTML = matchCount;
+  document.querySelector(".move-count").innerHTML = moveCount;
+
+  // Reset timer
+  seconds = 0;
+  minutes = 0;
+  document.querySelector(".timing").innerHTML = `00:00`;
+
+  // Reset game mode to previously selected or easy
+  if (!saveMode) {
+    saveMode = "easy";
+  }
+  document.querySelector(".mode-name").innerHTML = saveMode;
+  renderGameBoard(selectedMode(saveMode));
+
+  // Play game sound again
+  if (mainGameSound.paused) {
+    mainGameSound.play();
+  }
+
+  // Restart timer
+  callTimer();
+});
