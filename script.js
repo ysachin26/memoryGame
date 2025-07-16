@@ -21,6 +21,9 @@ selectedMode("easy")
 
   let matchCount = 0;
   let moveCount = 0;
+  let bestScore = 0;
+  let isSoundOn = true;  
+
 
  document.querySelector(".match-count").innerHTML = matchCount;
  document.querySelector(".move-count").innerHTML =  moveCount;
@@ -76,14 +79,23 @@ function selectedMode(mode)
   }
   return count
 }
+
+
 function renderGameBoard(count)
 {
+
   const GameBoard = document.querySelector(".gameboard");
+
    GameBoard.innerHTML = "";
+
  let selectedCart = [...CardFaces].slice(0, count).sort(() => 0.5 - Math.random());
+
 let cardPairs = [...selectedCart, ...selectedCart];
+
 cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
+
  cardPairs.forEach((cardName) => {
+
   //creating an html elememt
   const card = document.createElement("div");
   card.classList.add("card");
@@ -148,8 +160,16 @@ cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
         setTimeout(() => {
           winningBoard.classList.remove("winningpopup-hidden")
         }, 300);
+   document.querySelector(".gameScore").innerHTML = "Your Score: " + calculateScore(saveMode || "easy", moveCount, matchCount, minutes, seconds);
+  
+      let newScore =  calculateScore(saveMode || "easy", moveCount, matchCount, minutes, seconds);
+      if(newScore>bestScore)
+      {
+         bestScore = newScore
+          document.querySelector(".score-count").innerHTML= bestScore;
+      }
 
-       
+     
       }
     } else {
       setTimeout(() => {
@@ -189,8 +209,7 @@ innerOptions.forEach((option)=>
       count = selectedMode(saveMode)
      document.querySelector(".match-count").innerHTML = 0;
           document.querySelector(".move-count").innerHTML = 0;
-         
-
+ 
   })
 })
 
@@ -298,32 +317,83 @@ function recordGameTime() {
 const playAgain = document.getElementById("playagainbtn");
 
 playAgain.addEventListener("click", () => {
-  // Hide the popup
   document.querySelector(".winningpopup").classList.add("winningpopup-hidden");
 
-  // Reset values
+ 
   matchCount = 0;
   moveCount = 0;
   document.querySelector(".match-count").innerHTML = matchCount;
   document.querySelector(".move-count").innerHTML = moveCount;
 
-  // Reset timer
+
   seconds = 0;
   minutes = 0;
   document.querySelector(".timing").innerHTML = `00:00`;
 
-  // Reset game mode to previously selected or easy
   if (!saveMode) {
     saveMode = "easy";
   }
   document.querySelector(".mode-name").innerHTML = saveMode;
   renderGameBoard(selectedMode(saveMode));
 
-  // Play game sound again
-  if (mainGameSound.paused) {
+ isSoundOn = !isSoundOn;
+
+  if (isSoundOn) {
     mainGameSound.play();
+    getbtn.querySelector("span").textContent = "ON";
+    buttonSlider.style.left = "5px";
+  } else {
+    mainGameSound.pause();
+    getbtn.querySelector("span").textContent = "OFF";
+    buttonSlider.style.left = "calc(100% - 25px)";
+  }
+document.querySelector(".score-count").innerHTML = bestScore;
+
+  callTimer();
+
+});
+
+ 
+function calculateScore(mode, moveCount, matchCount, minutes, seconds) {
+  const totalSeconds = minutes * 60 + seconds;
+
+  let maxMatches;
+  let timeWeight, moveWeight, baseScore;
+
+  switch (mode.toLowerCase()) {
+    case "easy":
+      maxMatches = 6;
+      baseScore = 300;
+      timeWeight = 1;
+      moveWeight = 1.2;
+      break;
+    case "medium":
+      maxMatches = 9;
+      baseScore = 600;
+      timeWeight = 1.5;
+      moveWeight = 1.5;
+      break;
+    case "hard":
+      maxMatches = 12;
+      baseScore = 900;
+      timeWeight = 2;
+      moveWeight = 1.8;
+      break;
+    default:
+      maxMatches = 6;
+      baseScore = 300;
+      timeWeight = 1;
+      moveWeight = 1.2;
   }
 
-  // Restart timer
-  callTimer();
-});
+  const minMoves = maxMatches * 2;
+
+  const movePenalty = Math.max(0, (moveCount - minMoves) * moveWeight);
+  const timePenalty = totalSeconds * timeWeight;
+
+  const rawScore = baseScore - movePenalty - timePenalty;
+
+  const finalScore = Math.max(0, Math.round(rawScore)); // Never negative
+  return finalScore;
+}
+
