@@ -1,9 +1,10 @@
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(6,150px);
   justify-items: center;
   width: 100%;
-  align-content: center;
+  align-items: center;
+ justify-content: center;
 }
 
 .card {
