@@ -1,5 +1,5 @@
 let CardFaces = [
-  "angry-face",
+   "angry-face",
   "baby-face",
   "big-grin-face",
   "closedeyes-laugh-face",
@@ -62,6 +62,7 @@ function setGridLayout(mode) {
   requestAnimationFrame(() => {
     cards.forEach((card) => {
       if (mode === "hard") {
+        console.log(mode,"call by play again")
         card.style.width = "130px";
         card.style.height = "150px";
       }
@@ -216,7 +217,9 @@ innerOptions.forEach((option) => {
     matchCount = 0;
     moveCount = 0;
     count = selectedMode(saveMode);
-
+    seconds =0;
+    minutes =0;
+    document.querySelector(".timing").innerHTML = `00:00`;
     document.querySelector(".match-count").innerHTML = 0;
     document.querySelector(".move-count").innerHTML = 0;
   });
@@ -333,13 +336,9 @@ playAgain.addEventListener("click", () => {
   seconds = 0;
   minutes = 0;
   document.querySelector(".timing").innerHTML = `00:00`;
-
-  if (!saveMode) {
-    saveMode = "easy";
-  }
   document.querySelector(".mode-name").innerHTML = saveMode;
   renderGameBoard(selectedMode(saveMode));
-
+   setGridLayout(saveMode)
   isSoundOn = !isSoundOn;
 
   if (isSoundOn) {
@@ -352,8 +351,8 @@ playAgain.addEventListener("click", () => {
     buttonSlider.style.left = "calc(100% - 25px)";
   }
   document.querySelector(".score-count").innerHTML = bestScore;
-
   callTimer();
+   
 });
 
 function calculateScore(mode, moveCount, matchCount, minutes, seconds) {

@@ -1,0 +1,18 @@
+.front {
+  transform: rotateY(180deg);
+  z-index: 2;
+}
+.card.flipped .front {
+  transform: rotateY(0);
+}
+.back {
+  transform: rotateY(0deg);
+  z-index: 1;
+}
+.card.flipped .back {
+  transform: rotateY(180deg);
+}
+
+.top-navbar {
+  justify-items: center;
+}
