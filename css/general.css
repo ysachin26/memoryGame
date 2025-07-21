@@ -3,14 +3,16 @@
   padding: 0;
 }
 .main-container {
-  margin: 2rem;
+  margin: 2rem; 
 }
-
+body{
+background-image: url("../Images/background/background.jpg");
+}
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
-  max-width: 100%;
-  height: auto;
+  height: 100%;
+  width: 100%;
   column-gap: 0.5rem;
  
 }

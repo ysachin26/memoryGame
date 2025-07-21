@@ -1,3 +1,5 @@
+document.querySelector(".score-count").innerHTML = fetchScore()
+
 let CardFaces = [
    "angry-face",
   "baby-face",
@@ -183,6 +185,7 @@ function renderGameBoard(count) {
           );
           if (newScore > bestScore) {
             bestScore = newScore;
+         saveScore(bestScore)
             document.querySelector(".score-count").innerHTML = bestScore;
           }
         }
@@ -291,6 +294,7 @@ startBtn.addEventListener("click", () => {
   playerName = document.querySelector(".playerName input").value;
   document.querySelector(".winningPlayerName").innerHTML =
     `Congratulations ${playerName}`;
+    document.querySelector(".player-name").innerHTML = playerName;
   callTimer();
 });
 
@@ -397,3 +401,19 @@ function calculateScore(mode, moveCount, matchCount, minutes, seconds) {
   const finalScore = Math.max(0, Math.round(rawScore)); // Never negative
   return finalScore;
 }
+
+
+//score local storage
+
+function saveScore(bestScore)
+{
+  localStorage.setItem("bestScore",JSON.stringify(bestScore))
+} 
+
+function fetchScore()
+{
+ let saveScore = JSON.parse(localStorage.getItem("bestScore"))
+ return saveScore;
+}
+ 
+ 

@@ -10,8 +10,7 @@
 }
 .restart,
 .setting,
-.score,
-.toggle {
+.score {
   gap: 1rem;
   display: flex;
   justify-items: center;
@@ -25,8 +24,7 @@
 }
 .restart-name,
 .setting-name,
-.score-name,
-.toggle-name {
+.score-name,.player {
   font-family: "Galada", cursive;
   font-weight: 400;
   font-style: normal;
@@ -34,8 +32,7 @@
 }
 .restart-icon,
 .setting-icon,
-.score-count,
-.toggle-icon {
+.score-count {
   display: flex;
   align-items: center;
   justify-items: center;
@@ -46,6 +43,23 @@
   width: 20px;
   height: 20px;
   color: white;
+}
+.player
+{
+  display: flex;
+    justify-content: center;
+ 
+}
+.player-name
+{
+  
+  height: 20px;
+  margin-left: 4px;
+
+}
+.player-label
+{
+  width: 100%;
 }
 .restart-icon img,
 .setting-icon img {
