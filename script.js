@@ -1,7 +1,5 @@
-document.querySelector(".score-count").innerHTML = fetchScore()
-
 let CardFaces = [
-   "angry-face",
+"angry-face",
   "baby-face",
   "big-grin-face",
   "closedeyes-laugh-face",
@@ -16,6 +14,7 @@ let CardFaces = [
   "tears-of-joy-face",
   "wink-face",
   "worried-face",
+ 
 ];
 
 let count;
@@ -28,7 +27,7 @@ let isSoundOn = true;
 let firstCard = null;
 let secondCard = null;
 let lockedCard = false;
-
+ 
 selectedMode("easy");
 document.querySelector(".match-count").innerHTML = matchCount;
 document.querySelector(".move-count").innerHTML = moveCount;
@@ -183,11 +182,13 @@ function renderGameBoard(count) {
             minutes,
             seconds,
           );
-          if (newScore > bestScore) {
-            bestScore = newScore;
-         saveScore(bestScore)
-            document.querySelector(".score-count").innerHTML = bestScore;
-          }
+           
+if (newScore > bestScore) {
+  bestScore = newScore;
+  saveScore(saveMode, bestScore);
+}
+
+document.querySelector(".score-count").innerHTML = bestScore;
         }
       } else {
         setTimeout(() => {
@@ -225,6 +226,9 @@ innerOptions.forEach((option) => {
     document.querySelector(".timing").innerHTML = `00:00`;
     document.querySelector(".match-count").innerHTML = 0;
     document.querySelector(".move-count").innerHTML = 0;
+   const savedScores = fetchScore();
+    bestScore = savedScores[saveMode] || 0;
+    document.querySelector(".score-count").innerHTML = bestScore;
   });
 });
 
@@ -236,23 +240,31 @@ restartGame.addEventListener("click", () => {
   document.querySelector(".gameboard").innerHTML = " ";
 
   matchCount = 0;
-  document.querySelector(".match-count").innerHTML = matchCount;
-
   moveCount = 0;
-  document.querySelector(".move-count").innerHTML = moveCount;
+  seconds = 0;
+  minutes = 0;
 
-  document.querySelector(".mode-name").innerHTML = "easy";
+  document.querySelector(".match-count").innerHTML = matchCount;
+  document.querySelector(".move-count").innerHTML = moveCount;
+  document.querySelector(".timing").innerHTML = `00:00`;
+
+  // If no saveMode yet, default to "easy"
+  if (!saveMode) saveMode = "easy";
+
+  document.querySelector(".mode-name").innerHTML = saveMode;
+  count = selectedMode(saveMode);
+  setGridLayout(saveMode);
+
+  const savedScores = fetchScore();
+  bestScore = savedScores[saveMode] || 0;
+  document.querySelector(".score-count").innerHTML = bestScore;
 
   if (!mainGameSound.paused) {
     mainGameSound.currentTime = 0;
     mainGameSound.play();
   }
-
-  renderGameBoard(6);
-  seconds = 0;
-  minutes = 0;
-  document.querySelector(".timing").innerHTML = `00:00`;
 });
+
 
 //game sound popup
 const soundClass = document.querySelector(".gamesoundpopup");
@@ -404,16 +416,19 @@ function calculateScore(mode, moveCount, matchCount, minutes, seconds) {
 
 
 //score local storage
-
-function saveScore(bestScore)
-{
-  localStorage.setItem("bestScore",JSON.stringify(bestScore))
-} 
-
-function fetchScore()
-{
- let saveScore = JSON.parse(localStorage.getItem("bestScore"))
- return saveScore;
+function saveScore(mode, bestScore) {
+  let savedScore = JSON.parse(localStorage.getItem("bestScore")) || {};
+  savedScore[mode] = bestScore;
+  localStorage.setItem("bestScore", JSON.stringify(savedScore));
 }
+
  
+function fetchScore() {
+  let savedScore = JSON.parse(localStorage.getItem("bestScore")) || {};
+  return savedScore;
+}
+
  
+  const savedScores = fetchScore();
+  bestScore = savedScores[saveMode] || 0;
+  document.querySelector(".score-count").innerHTML = bestScore;
