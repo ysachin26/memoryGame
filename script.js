@@ -1,5 +1,5 @@
 let CardFaces = [
-"angry-face",
+  "angry-face",
   "baby-face",
   "big-grin-face",
   "closedeyes-laugh-face",
@@ -14,33 +14,43 @@ let CardFaces = [
   "tears-of-joy-face",
   "wink-face",
   "worried-face",
- 
+
 ];
 
 let count;
 
+//total match count is counted here
 let matchCount = 0;
-let moveCount = 0;
-let bestScore = 0;
-let isSoundOn = true;
 
+//total 2 moves is allowed
+let moveCount = 0;
+
+//best score will be counted to best score variable
+let bestScore = 0;
+
+let isSoundOn = true;
 let firstCard = null;
 let secondCard = null;
 let lockedCard = false;
- 
+
+//game mode is selected from here 
 selectedMode("easy");
+
 document.querySelector(".match-count").innerHTML = matchCount;
 document.querySelector(".move-count").innerHTML = moveCount;
+
+//winning board will appear after match over
 const winningBoard = document.querySelector(".winningpopup");
 
 //NOTE:this shuffle method is not efficient but it good for small games like this.
 //future upgrade of this is fisher yate algorithm (best and optimised method)
 
+//game sounds
 const flipSound = new Audio("sound-effects/card-flip-sound.mp3");
 const successSound = new Audio("sound-effects/success.mp3");
 const victorySound = new Audio("sound-effects/Victory Sound Effect.mp3");
-
 const mainGameSound = new Audio("sound-effects/main-game-sound.mp3");
+
 mainGameSound.volume = 0.6;
 mainGameSound.loop = true;
 mainGameSound.play();
@@ -52,6 +62,7 @@ document.addEventListener(
   { once: true },
 );
 
+//grid layout based on game mode.
 function setGridLayout(mode) {
   const gameBoard = document.querySelector(".gameboard");
   const cards = document.querySelectorAll(".card");
@@ -63,7 +74,7 @@ function setGridLayout(mode) {
   requestAnimationFrame(() => {
     cards.forEach((card) => {
       if (mode === "hard") {
-        console.log(mode,"call by play again")
+        console.log(mode, "call by play again")
         card.style.width = "130px";
         card.style.height = "150px";
       }
@@ -71,6 +82,7 @@ function setGridLayout(mode) {
   });
 }
 
+//game mode function 
 function selectedMode(mode) {
   if (mode === "easy") {
     count = 6;
@@ -86,6 +98,7 @@ function selectedMode(mode) {
   return count;
 }
 
+//game board rendering function after difficulty mode is getting selected
 function renderGameBoard(count) {
   const GameBoard = document.querySelector(".gameboard");
 
@@ -182,13 +195,13 @@ function renderGameBoard(count) {
             minutes,
             seconds,
           );
-           
-if (newScore > bestScore) {
-  bestScore = newScore;
-  saveScore(saveMode, bestScore);
-}
 
-document.querySelector(".score-count").innerHTML = bestScore;
+          if (newScore > bestScore) {
+            bestScore = newScore;
+            saveScore(saveMode, bestScore);
+          }
+
+          document.querySelector(".score-count").innerHTML = bestScore;
         }
       } else {
         setTimeout(() => {
@@ -221,12 +234,12 @@ innerOptions.forEach((option) => {
     matchCount = 0;
     moveCount = 0;
     count = selectedMode(saveMode);
-    seconds =0;
-    minutes =0;
+    seconds = 0;
+    minutes = 0;
     document.querySelector(".timing").innerHTML = `00:00`;
     document.querySelector(".match-count").innerHTML = 0;
     document.querySelector(".move-count").innerHTML = 0;
-   const savedScores = fetchScore();
+    const savedScores = fetchScore();
     bestScore = savedScores[saveMode] || 0;
     document.querySelector(".score-count").innerHTML = bestScore;
   });
@@ -306,7 +319,7 @@ startBtn.addEventListener("click", () => {
   playerName = document.querySelector(".playerName input").value;
   document.querySelector(".winningPlayerName").innerHTML =
     `Congratulations ${playerName}`;
-    document.querySelector(".player-name").innerHTML = playerName;
+  document.querySelector(".player-name").innerHTML = playerName;
   callTimer();
 });
 
@@ -341,6 +354,7 @@ function recordGameTime() {
 
 const playAgain = document.getElementById("playagainbtn");
 
+
 playAgain.addEventListener("click", () => {
   document.querySelector(".winningpopup").classList.add("winningpopup-hidden");
 
@@ -354,7 +368,9 @@ playAgain.addEventListener("click", () => {
   document.querySelector(".timing").innerHTML = `00:00`;
   document.querySelector(".mode-name").innerHTML = saveMode;
   renderGameBoard(selectedMode(saveMode));
-   setGridLayout(saveMode)
+  setGridLayout(saveMode)
+
+  //game sound logic is written here.
   isSoundOn = !isSoundOn;
 
   if (isSoundOn) {
@@ -368,9 +384,11 @@ playAgain.addEventListener("click", () => {
   }
   document.querySelector(".score-count").innerHTML = bestScore;
   callTimer();
-   
+
 });
 
+
+// score calculation logic will be calculated from here.
 function calculateScore(mode, moveCount, matchCount, minutes, seconds) {
   const totalSeconds = minutes * 60 + seconds;
 
@@ -415,20 +433,19 @@ function calculateScore(mode, moveCount, matchCount, minutes, seconds) {
 }
 
 
-//score local storage
+//score will be saved in local storage
 function saveScore(mode, bestScore) {
   let savedScore = JSON.parse(localStorage.getItem("bestScore")) || {};
   savedScore[mode] = bestScore;
   localStorage.setItem("bestScore", JSON.stringify(savedScore));
 }
 
- 
+//fetch the best score from the local storage.
 function fetchScore() {
   let savedScore = JSON.parse(localStorage.getItem("bestScore")) || {};
   return savedScore;
 }
 
- 
-  const savedScores = fetchScore();
-  bestScore = savedScores[saveMode] || 0;
-  document.querySelector(".score-count").innerHTML = bestScore;
+const savedScores = fetchScore();
+bestScore = savedScores[saveMode] || 0;
+document.querySelector(".score-count").innerHTML = bestScore;
