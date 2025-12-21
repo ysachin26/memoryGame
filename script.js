@@ -53,7 +53,7 @@ const mainGameSound = new Audio("sound-effects/main-game-sound.mp3");
 
 mainGameSound.volume = 0.6;
 mainGameSound.loop = true;
-mainGameSound.play();
+mainGameSound.paused(); // switch to play() to again start the sound of the main game
 document.addEventListener(
   "click",
   () => {
@@ -112,6 +112,10 @@ function renderGameBoard(count) {
 
   cardPairs.sort(() => 0.5 - Math.random()); // You can shuffle again here
 
+
+  //main game logic 
+  
+  
   cardPairs.forEach((cardName) => {
     //creating an html elememt
     const card = document.createElement("div");
@@ -217,6 +221,9 @@ function renderGameBoard(count) {
   });
 }
 
+
+//game options -> difficulty levels 
+
 const gameModeOptions = document.querySelector(".mode");
 const modeOptions = document.querySelector(".options");
 
@@ -245,7 +252,7 @@ innerOptions.forEach((option) => {
   });
 });
 
-//restart game
+//restart game and resetting everything to default
 
 const restartGame = document.querySelector(".restart");
 
@@ -310,6 +317,8 @@ getbtn.addEventListener("click", () => {
   }
 });
 
+//Instruction Wrapper Around Game Board
+
 const startPage = document.querySelector(".instruction");
 const startBtn = document.querySelector(".start-game");
 let playerName = "";
@@ -354,6 +363,8 @@ function recordGameTime() {
 
 const playAgain = document.getElementById("playagainbtn");
 
+
+//winning popup 
 
 playAgain.addEventListener("click", () => {
   document.querySelector(".winningpopup").classList.add("winningpopup-hidden");
@@ -449,3 +460,7 @@ function fetchScore() {
 const savedScores = fetchScore();
 bestScore = savedScores[saveMode] || 0;
 document.querySelector(".score-count").innerHTML = bestScore;
+
+//botPlayer function 
+
+let playerTurn = 'human';
