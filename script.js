@@ -401,3 +401,8 @@ playAgain.addEventListener("click", () => {
   callTimer();
 
 });
+
+
+const savedScores = fetchScore();
+bestScore = savedScores[saveMode] || 0;
+document.querySelector(".score-count").innerHTML = bestScore;
