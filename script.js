@@ -1,3 +1,7 @@
+
+
+import { calculateScore, fetchScore, saveScore } from "./score.js";
+
 let CardFaces = [
   "angry-face",
   "baby-face",
@@ -53,7 +57,7 @@ const mainGameSound = new Audio("sound-effects/main-game-sound.mp3");
 
 mainGameSound.volume = 0.6;
 mainGameSound.loop = true;
-mainGameSound.paused(); // switch to play() to again start the sound of the main game
+mainGameSound.pause(); // switch to play() to again start the sound of the main game
 document.addEventListener(
   "click",
   () => {
@@ -114,8 +118,8 @@ function renderGameBoard(count) {
 
 
   //main game logic 
-  
-  
+
+
   cardPairs.forEach((cardName) => {
     //creating an html elememt
     const card = document.createElement("div");
@@ -397,70 +401,3 @@ playAgain.addEventListener("click", () => {
   callTimer();
 
 });
-
-
-// score calculation logic will be calculated from here.
-function calculateScore(mode, moveCount, matchCount, minutes, seconds) {
-  const totalSeconds = minutes * 60 + seconds;
-
-  let maxMatches;
-  let timeWeight, moveWeight, baseScore;
-
-  switch (mode.toLowerCase()) {
-    case "easy":
-      maxMatches = 6;
-      baseScore = 300;
-      timeWeight = 1;
-      moveWeight = 1.2;
-      break;
-    case "medium":
-      maxMatches = 9;
-      baseScore = 600;
-      timeWeight = 1.5;
-      moveWeight = 1.5;
-      break;
-    case "hard":
-      maxMatches = 12;
-      baseScore = 900;
-      timeWeight = 2;
-      moveWeight = 1.8;
-      break;
-    default:
-      maxMatches = 6;
-      baseScore = 300;
-      timeWeight = 1;
-      moveWeight = 1.2;
-  }
-
-  const minMoves = maxMatches * 2;
-
-  const movePenalty = Math.max(0, (moveCount - minMoves) * moveWeight);
-  const timePenalty = totalSeconds * timeWeight;
-
-  const rawScore = baseScore - movePenalty - timePenalty;
-
-  const finalScore = Math.max(0, Math.round(rawScore)); // Never negative
-  return finalScore;
-}
-
-
-//score will be saved in local storage
-function saveScore(mode, bestScore) {
-  let savedScore = JSON.parse(localStorage.getItem("bestScore")) || {};
-  savedScore[mode] = bestScore;
-  localStorage.setItem("bestScore", JSON.stringify(savedScore));
-}
-
-//fetch the best score from the local storage.
-function fetchScore() {
-  let savedScore = JSON.parse(localStorage.getItem("bestScore")) || {};
-  return savedScore;
-}
-
-const savedScores = fetchScore();
-bestScore = savedScores[saveMode] || 0;
-document.querySelector(".score-count").innerHTML = bestScore;
-
-//botPlayer function 
-
-let playerTurn = 'human';
