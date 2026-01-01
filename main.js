@@ -1,8 +1,9 @@
 
 
 import { calculateScore, fetchScore, saveScore } from "./score.js";
+import { memoryBot } from "./bot-player.js";
 
-let CardFaces = [
+export let CardFaces = [
   "angry-face",
   "baby-face",
   "big-grin-face",
@@ -35,7 +36,17 @@ let bestScore = 0;
 let isSoundOn = true;
 let firstCard = null;
 let secondCard = null;
-let lockedCard = false;
+export let lockedCard = false;
+export let botRunning = false;
+
+
+export let currPlayer = 'human';
+
+export function setCurrPlayer(value) {
+  currPlayer = value;
+}
+
+
 
 //game mode is selected from here 
 selectedMode("easy");
@@ -103,7 +114,7 @@ function selectedMode(mode) {
 }
 
 //game board rendering function after difficulty mode is getting selected
-function renderGameBoard(count) {
+export function renderGameBoard(count) {
   const GameBoard = document.querySelector(".gameboard");
 
   GameBoard.innerHTML = "";
@@ -137,7 +148,10 @@ function renderGameBoard(count) {
     card.appendChild(back);
     GameBoard.appendChild(card);
 
+    //human click
+
     card.addEventListener("click", () => {
+      if (lockedCard || currPlayer !== 'human') return;
       moveCount++;
       document.querySelector(".move-count").innerHTML = Math.floor(
         moveCount / 2,
@@ -219,6 +233,9 @@ function renderGameBoard(count) {
           firstCard = null;
           secondCard = null;
           lockedCard = false;
+          currPlayer = 'bot';
+          memoryBot();
+
         }, 1000);
       }
     });
